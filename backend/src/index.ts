@@ -13,9 +13,11 @@ app.use((_req, res) => {
   res.status(404).json({ error: 'Not found' });
 });
 
-const PORT = process.env.PORT ?? 3002;
-app.listen(PORT, () => {
-  console.log(`Asset tracker API running on http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  const PORT = process.env.PORT ?? 3002;
+  app.listen(PORT, () => {
+    console.log(`Asset tracker API running on http://localhost:${PORT}`);
+  });
+}
 
 export default app;

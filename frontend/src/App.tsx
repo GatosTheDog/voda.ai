@@ -16,6 +16,7 @@ export default function App() {
   const [editingAsset, setEditingAsset] = useState<Asset | null>(null);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [shouldRenderAside, setShouldRenderAside] = useState(false);
+  const [mapFocusAsset, setMapFocusAsset] = useState<Asset | null>(null);
 
   function handleFilterChange(next: AssetFilters) {
     const resetPage = next.page === undefined;
@@ -46,6 +47,11 @@ export default function App() {
     setShowCreateForm(false);
     setEditingAsset(null);
     setShouldRenderAside(false);
+  }
+
+  function handleViewOnMap(asset: Asset) {
+    setTab('map');
+    setMapFocusAsset(asset);
   }
 
   return (
@@ -89,6 +95,8 @@ export default function App() {
               filters={filters}
               onSelect={handleSelectAsset}
               selectedId={selectedAsset?.id}
+              focusAsset={mapFocusAsset}
+              onFocusConsumed={() => setMapFocusAsset(null)}
             />
           )}
         </div>
@@ -106,6 +114,7 @@ export default function App() {
               onEdit={handleEdit}
               onClose={() => setShouldRenderAside(false)}
               onDelete={() => handleSelectAsset(null)}
+              onViewOnMap={handleViewOnMap}
             />
           )}
         </aside>}

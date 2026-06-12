@@ -8,6 +8,7 @@ interface Props {
   onEdit: (asset: Asset) => void;
   onDelete: () => void;
   onClose: () => void;
+  onViewOnMap: (asset: Asset) => void;
 }
 
 const STATUS_LABEL: Record<string, string> = {
@@ -16,7 +17,7 @@ const STATUS_LABEL: Record<string, string> = {
   critical: 'Critical',
 };
 
-export default function AssetDetail({ asset, onEdit, onDelete, onClose }: Props) {
+export default function AssetDetail({ asset, onEdit, onDelete, onClose, onViewOnMap }: Props) {
   const queryClient = useQueryClient();
 
   const { mutate: remove, isPending } = useMutation({
@@ -42,30 +43,46 @@ export default function AssetDetail({ asset, onEdit, onDelete, onClose }: Props)
       </div>
 
       <dl className={styles.fields}>
-        <dt>Type</dt>
-        <dd className={styles.capitalize}>{asset.type}</dd>
+        <div>
+          <dt>Type</dt>
+          <dd className={styles.capitalize}>{asset.type}</dd>
+        </div>
+        <div>
+          <dt>Status</dt>
+          <dd>{STATUS_LABEL[asset.status]}</dd>
+        </div>
 
-        <dt>Latitude</dt>
-        <dd>{asset.lat}</dd>
+        <div>
+          <dt>Latitude</dt>
+          <dd>{asset.lat}</dd>
+        </div>
+        <div>
+          <dt>Longitude</dt>
+          <dd>{asset.lng}</dd>
+        </div>
 
-        <dt>Longitude</dt>
-        <dd>{asset.lng}</dd>
+        <div className={styles.fieldFull}>
+          <dt>Installed</dt>
+          <dd>{asset.installed_at}</dd>
+        </div>
 
-        <dt>Installed</dt>
-        <dd>{asset.installed_at}</dd>
-
-        <dt>Last inspected</dt>
-        <dd>{asset.last_inspected_at ?? '—'}</dd>
+        <div className={styles.fieldFull}>
+          <dt>Last inspected</dt>
+          <dd>{asset.last_inspected_at ?? '—'}</dd>
+        </div>
 
         {asset.notes && (
-          <>
+          <div className={styles.fieldFull}>
             <dt>Notes</dt>
             <dd>{asset.notes}</dd>
-          </>
+          </div>
         )}
       </dl>
 
       <div className={styles.actions}>
+        <button className={styles.mapBtn} onClick={() => onViewOnMap(asset)}>
+          View on map
+        </button>
         <button className={styles.editBtn} onClick={() => onEdit(asset)}>
           Edit
         </button>

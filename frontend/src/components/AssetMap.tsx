@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Popup, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, CircleMarker, Popup, useMapEvents, useMap } from 'react-leaflet';
 import { useQuery } from '@tanstack/react-query';
 import { listAssets } from '../api';
 import { Asset, AssetFilters } from '../types';
@@ -11,11 +11,7 @@ const STATUS_COLOR: Record<string, string> = {
   critical: '#ef4444',
 };
 
-interface BboxTrackerProps {
-  onBboxChange: (bbox: string) => void;
-}
-
-function BboxTracker({ onBboxChange }: BboxTrackerProps) {
+function BboxTracker({ onBboxChange }: { onBboxChange: (bbox: string) => void }) {
   const map = useMapEvents({
     moveend() {
       const b = map.getBounds();
@@ -31,13 +27,27 @@ function BboxTracker({ onBboxChange }: BboxTrackerProps) {
   return null;
 }
 
+function MapFocuser({ asset, onConsumed }: { asset: Asset | null; onConsumed: () => void }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!asset) return;
+    map.flyTo([asset.lat, asset.lng], 15, { duration: 1 });
+    onConsumed();
+  }, [asset]);
+
+  return null;
+}
+
 interface Props {
   filters: AssetFilters;
   onSelect: (asset: Asset) => void;
   selectedId?: string;
+  focusAsset?: Asset | null;
+  onFocusConsumed?: () => void;
 }
 
-export default function AssetMap({ filters, onSelect, selectedId }: Props) {
+export default function AssetMap({ filters, onSelect, selectedId, focusAsset, onFocusConsumed }: Props) {
   const [bbox, setBbox] = useState<string | undefined>();
 
   const { data } = useQuery({
@@ -61,6 +71,7 @@ export default function AssetMap({ filters, onSelect, selectedId }: Props) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <BboxTracker onBboxChange={setBbox} />
+        <MapFocuser asset={focusAsset ?? null} onConsumed={onFocusConsumed ?? (() => {})} />
         {assets.map((asset) => (
           <CircleMarker
             key={asset.id}

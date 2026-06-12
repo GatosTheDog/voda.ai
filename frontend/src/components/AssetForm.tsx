@@ -105,14 +105,14 @@ export default function AssetForm({ asset, onClose }: Props) {
 
       <form onSubmit={handleSubmit} className={styles.form} noValidate>
         <label className={styles.field}>
-          Name
+          <span className={styles.required}>Name</span>
           <input value={form.name} onChange={(e) => set('name', e.target.value)} />
           {errors.name && <span className={styles.error}>{errors.name}</span>}
         </label>
 
         <div className={styles.row}>
           <label className={styles.field}>
-            Type
+            <span className={styles.required}>Type</span>
             <select value={form.type} onChange={(e) => set('type', e.target.value)}>
               <option value="pipe">Pipe</option>
               <option value="hydrant">Hydrant</option>
@@ -121,7 +121,7 @@ export default function AssetForm({ asset, onClose }: Props) {
             </select>
           </label>
           <label className={styles.field}>
-            Status
+            <span className={styles.required}>Status</span>
             <select value={form.status} onChange={(e) => set('status', e.target.value)}>
               <option value="ok">OK</option>
               <option value="warning">Warning</option>
@@ -132,7 +132,7 @@ export default function AssetForm({ asset, onClose }: Props) {
 
         <div className={styles.row}>
           <label className={styles.field}>
-            Latitude
+            <span className={styles.required}>Latitude</span>
             <input
               value={form.lat}
               onChange={(e) => set('lat', e.target.value)}
@@ -141,7 +141,7 @@ export default function AssetForm({ asset, onClose }: Props) {
             {errors.lat && <span className={styles.error}>{errors.lat}</span>}
           </label>
           <label className={styles.field}>
-            Longitude
+            <span className={styles.required}>Longitude</span>
             <input
               value={form.lng}
               onChange={(e) => set('lng', e.target.value)}
@@ -185,7 +185,7 @@ export default function AssetForm({ asset, onClose }: Props) {
         )}
 
         <label className={styles.field}>
-          Installed at
+          <span className={styles.required}>Installed at</span>
           <input
             type="date"
             value={form.installed_at}

@@ -63,23 +63,29 @@
 
 .fields {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 8px 16px;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 12px;
   margin-bottom: 24px;
 }
 
 .fields dt {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #888;
-  align-self: baseline;
+  margin-bottom: 2px;
 }
 
 .fields dd {
+  font-size: 13px;
   color: #1a1a2e;
-  word-break: break-word;
+  word-break: break-all;
+  margin-top: 2px;
+}
+
+.fieldFull {
+  grid-column: 1 / -1;
 }
 
 .capitalize {
@@ -88,7 +94,22 @@
 
 .actions {
   display: flex;
+  flex-direction: column;
   gap: 8px;
+}
+
+.mapBtn {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  background: #e8edff;
+  color: #4f6ef7;
+  font-weight: 500;
+}
+
+.mapBtn:hover {
+  background: #d4dcff;
 }
 
 .editBtn {

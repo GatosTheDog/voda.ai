@@ -71,18 +71,18 @@ export default function AssetList({ filters, onFiltersChange, onSelect, selected
 
       {totalPages > 1 && (
         <div className={styles.pagination}>
-          <button
-            disabled={page <= 1}
-            onClick={() => onFiltersChange({ page: page - 1 })}
-          >
+          <button disabled={page <= 1} onClick={() => onFiltersChange({ page: 1 })}>
+            «
+          </button>
+          <button disabled={page <= 1} onClick={() => onFiltersChange({ page: page - 1 })}>
             ← Prev
           </button>
           <span>{page} / {totalPages}</span>
-          <button
-            disabled={page >= totalPages}
-            onClick={() => onFiltersChange({ page: page + 1 })}
-          >
+          <button disabled={page >= totalPages} onClick={() => onFiltersChange({ page: page + 1 })}>
             Next →
+          </button>
+          <button disabled={page >= totalPages} onClick={() => onFiltersChange({ page: totalPages })}>
+            »
           </button>
         </div>
       )}

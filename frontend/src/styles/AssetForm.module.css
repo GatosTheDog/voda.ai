@@ -62,9 +62,14 @@
 }
 
 .row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.required::after {
+  content: ' *';
+  color: #ef4444;
 }
 
 .error {
