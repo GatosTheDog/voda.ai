@@ -1,0 +1,125 @@
+.panel {
+  padding: 20px;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.panelHeaderCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.closeBtn {
+  border: none;
+  background: none;
+  color: #888;
+  font-size: 16px;
+  padding: 4px;
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  color: #1a1a2e;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a2e;
+  line-height: 1.3;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.badge_ok {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge_warning {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.badge_critical {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+  margin-bottom: 24px;
+}
+
+.fields dt {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
+  align-self: baseline;
+}
+
+.fields dd {
+  color: #1a1a2e;
+  word-break: break-word;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.editBtn {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: #1a1a2e;
+  font-weight: 500;
+}
+
+.editBtn:hover {
+  background: #f3f4f6;
+}
+
+.deleteBtn {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  background: #fee2e2;
+  color: #991b1b;
+  font-weight: 500;
+}
+
+.deleteBtn:hover:not(:disabled) {
+  background: #fecaca;
+}
+
+.deleteBtn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

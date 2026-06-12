@@ -1,0 +1,151 @@
+.panel {
+  padding: 20px;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.panelHeader h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.closeBtn {
+  border: none;
+  background: none;
+  color: #888;
+  font-size: 16px;
+  padding: 4px;
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  color: #1a1a2e;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 7px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: #1a1a2e;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: #4f6ef7;
+  box-shadow: 0 0 0 2px rgba(79,110,247,0.15);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.pickBtn {
+  padding: 6px 12px;
+  border: 1px dashed #4f6ef7;
+  border-radius: 6px;
+  background: #f0f4ff;
+  color: #4f6ef7;
+  font-size: 13px;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.pickBtn:hover {
+  background: #e0e8ff;
+}
+
+.miniMap {
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #d1d5db;
+  position: relative;
+}
+
+.mapHint {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.formActions {
+  display: flex;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.cancelBtn {
+  flex: 1;
+  padding: 9px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: #555;
+  font-weight: 500;
+}
+
+.cancelBtn:hover {
+  background: #f3f4f6;
+}
+
+.submitBtn {
+  flex: 2;
+  padding: 9px;
+  border: none;
+  border-radius: 6px;
+  background: #4f6ef7;
+  color: #fff;
+  font-weight: 600;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #3a57e8;
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
