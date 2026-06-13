@@ -51,7 +51,7 @@ export default function AssetMap({ filters, onSelect, selectedId, focusAsset, on
   const [bbox, setBbox] = useState<string | undefined>();
 
   const { data } = useQuery({
-    queryKey: ['assets-map', filters, bbox],
+    queryKey: ['assets', 'map', filters, bbox],
     queryFn: () => listAssets({ ...filters, bbox, page: 1, limit: 200 }),
     enabled: !!bbox,
     placeholderData: (prev) => prev,

@@ -1,9 +1,25 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction, RequestHandler } from 'express';
 import * as store from '../store';
 import { validateAssetInput, ValidationError } from '../validate';
 import { AssetStatus, AssetType, ListFilters } from '../types';
 
 const router = Router();
+
+//Middleware
+function validateBody(requireAll: boolean): RequestHandler {
+  return (req: Request, res: Response, next: NextFunction) => {
+    try {
+      validateAssetInput(req.body, requireAll);
+      next();
+    } catch (err) {
+      if (err instanceof ValidationError) {
+        res.status(422).json({ error: 'Validation failed', fields: err.fields });
+        return;
+      }
+      next(err);
+    }
+  };
+}
 
 router.get('/', (req: Request, res: Response) => {
   const page = Math.max(1, parseInt(String(req.query.page ?? '1'), 10) || 1);
@@ -36,30 +52,12 @@ router.get('/:id', (req: Request, res: Response) => {
   res.json({ data: asset });
 });
 
-router.post('/', (req: Request, res: Response) => {
-  try {
-    validateAssetInput(req.body, true);
-  } catch (err) {
-    if (err instanceof ValidationError) {
-      res.status(422).json({ error: 'Validation failed', fields: err.fields });
-      return;
-    }
-    throw err;
-  }
+router.post('/', validateBody(true), (req: Request, res: Response) => {
   const asset = store.create(req.body);
   res.status(201).json({ data: asset });
 });
 
-router.put('/:id', (req: Request, res: Response) => {
-  try {
-    validateAssetInput(req.body, false);
-  } catch (err) {
-    if (err instanceof ValidationError) {
-      res.status(422).json({ error: 'Validation failed', fields: err.fields });
-      return;
-    }
-    throw err;
-  }
+router.put('/:id', validateBody(false), (req: Request, res: Response) => {
   const asset = store.update(req.params.id, req.body);
   if (!asset) {
     res.status(404).json({ error: 'Not found' });
