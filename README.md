@@ -78,10 +78,6 @@ List assets with optional filters. Returns a paginated envelope.
 | `page` | number | default `1` |
 | `limit` | number | default `50`, capped at `200` |
 
-```json
-{ "data": [ /* Asset[] */ ], "total": 142, "page": 1, "limit": 50 }
-```
-
 `total` reflects the filtered count (before pagination), so the client can render "page X of Y".
 
 ### `GET /assets/:id`
