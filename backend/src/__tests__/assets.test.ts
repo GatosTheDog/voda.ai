@@ -92,6 +92,24 @@ describe('POST /api/assets', () => {
     expect(res.status).toBe(422);
     expect(res.body.fields.type).toBeDefined();
   });
+
+  it('strips unknown fields from the request body', async () => {
+    const res = await request(app).post('/api/assets').send({
+      name: 'With Junk',
+      type: 'sensor',
+      status: 'ok',
+      lat: 40.75,
+      lng: -73.98,
+      installed_at: '2024-01-01',
+      last_inspected_at: null,
+      notes: '',
+      hacker: true,
+      id: 'forged-id',
+    });
+    expect(res.status).toBe(201);
+    expect(res.body.data.hacker).toBeUndefined();
+    expect(res.body.data.id).not.toBe('forged-id');
+  });
 });
 
 describe('PUT /api/assets/:id', () => {

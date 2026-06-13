@@ -2,6 +2,7 @@ import { randomUUID } from 'crypto';
 import * as fs from 'fs';
 import * as path from 'path';
 import { Asset, ListFilters, ListResult } from './types';
+import { pickAssetFields } from './sanitize';
 
 const db = new Map<string, Asset>();
 
@@ -38,7 +39,7 @@ export function findById(id: string): Asset | undefined {
 }
 
 export function create(input: Omit<Asset, 'id'>): Asset {
-  const asset: Asset = { id: randomUUID(), ...input };
+  const asset: Asset = { id: randomUUID(), ...(pickAssetFields(input) as Omit<Asset, 'id'>) };
   db.set(asset.id, asset);
   return asset;
 }
@@ -46,7 +47,7 @@ export function create(input: Omit<Asset, 'id'>): Asset {
 export function update(id: string, patch: Partial<Omit<Asset, 'id'>>): Asset | undefined {
   const existing = db.get(id);
   if (!existing) return undefined;
-  const updated: Asset = { ...existing, ...patch };
+  const updated: Asset = { ...existing, ...pickAssetFields(patch) };
   db.set(id, updated);
   return updated;
 }
