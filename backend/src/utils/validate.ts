@@ -1,4 +1,4 @@
-import { AssetStatus, AssetType } from './types';
+import { AssetStatus, AssetType } from '../types';
 
 export class ValidationError extends Error {
   constructor(public readonly fields: Record<string, string>) {

@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction, RequestHandler } from 'express';
-import * as store from '../store';
-import { validateAssetInput, ValidationError } from '../validate';
+import * as store from '../db/store';
+import { validateAssetInput, ValidationError } from '../utils/validate';
 import { AssetStatus, AssetType, ListFilters } from '../types';
 
 const router = Router();

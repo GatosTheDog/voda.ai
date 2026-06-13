@@ -1,4 +1,4 @@
-import { Asset } from './types';
+import { Asset } from '../types';
 
 // The only keys ever persisted. Anything else in a request body is dropped.
 export const ASSET_FIELDS: (keyof Omit<Asset, 'id'>)[] = [

@@ -21,13 +21,15 @@ A full-stack web app for tracking physical infrastructure assets (pipes, hydrant
 ├── seed.json              # 150 seed assets, loaded into memory on startup
 ├── backend/
 │   └── src/
-│       ├── index.ts       # Express bootstrap, mounts /api/assets
-│       ├── types.ts       # Asset, filter, and result types (source of truth)
-│       ├── store.ts       # In-memory Map: list/find/create/update/remove
-│       ├── validate.ts    # Pure validation helper + ValidationError
-│       ├── sanitize.ts    # Whitelists known asset fields (drops unknown keys)
+│       ├── index.ts          # Express bootstrap, mounts /api/assets
+│       ├── types.ts          # Asset, filter, and result types (source of truth)
+│       ├── db/
+│       │   └── store.ts      # In-memory Map: list/find/create/update/remove
+│       ├── utils/
+│       │   ├── validate.ts   # Pure validation helper + ValidationError
+│       │   └── sanitize.ts   # Whitelists known asset fields (drops unknown keys)
 │       └── routes/
-│           └── assets.ts  # REST routes + validation middleware
+│           └── assets.ts     # REST routes + validation middleware
 └── frontend/
     └── src/
         ├── App.tsx        # Owns shared state (tab, filters, selection)

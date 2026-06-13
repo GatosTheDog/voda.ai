@@ -1,4 +1,4 @@
-import { pickAssetFields, ASSET_FIELDS } from '../sanitize';
+import { pickAssetFields, ASSET_FIELDS } from '../utils/sanitize';
 
 describe('pickAssetFields', () => {
   it('keeps all known asset fields', () => {

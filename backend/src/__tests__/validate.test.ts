@@ -1,4 +1,4 @@
-import { validateAssetInput, ValidationError } from '../validate';
+import { validateAssetInput, ValidationError } from '../utils/validate';
 
 function valid() {
   return {

@@ -1,13 +1,13 @@
 import { randomUUID } from 'crypto';
 import * as fs from 'fs';
 import * as path from 'path';
-import { Asset, ListFilters, ListResult } from './types';
-import { pickAssetFields } from './sanitize';
+import { Asset, ListFilters, ListResult } from '../types';
+import { pickAssetFields } from '../utils/sanitize';
 
 const db = new Map<string, Asset>();
 
 function loadSeed() {
-  const seedPath = path.resolve(__dirname, '../../seed.json');
+  const seedPath = path.resolve(__dirname, '../../../seed.json');
   const raw = fs.readFileSync(seedPath, 'utf-8');
   const assets: Asset[] = JSON.parse(raw);
   for (const asset of assets) {
