@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteAsset } from '../api';
 import { Asset } from '../types';
@@ -19,6 +20,7 @@ const STATUS_LABEL: Record<string, string> = {
 
 export default function AssetDetail({ asset, onEdit, onDelete, onClose, onViewOnMap }: Props) {
   const queryClient = useQueryClient();
+  const [confirming, setConfirming] = useState(false);
 
   const { mutate: remove, isPending } = useMutation({
     mutationFn: () => deleteAsset(asset.id),
@@ -28,9 +30,6 @@ export default function AssetDetail({ asset, onEdit, onDelete, onClose, onViewOn
     },
   });
 
-  function handleDelete() {
-    if (window.confirm(`Delete "${asset.name}"?`)) remove();
-  }
 
   return (
     <div className={styles.panel}>
@@ -86,9 +85,21 @@ export default function AssetDetail({ asset, onEdit, onDelete, onClose, onViewOn
         <button className={styles.editBtn} onClick={() => onEdit(asset)}>
           Edit
         </button>
-        <button className={styles.deleteBtn} onClick={handleDelete} disabled={isPending}>
-          {isPending ? 'Deleting…' : 'Delete'}
-        </button>
+        {confirming ? (
+          <div className={styles.confirmRow}>
+            <span className={styles.confirmText}>Delete "{asset.name}"?</span>
+            <button className={styles.confirmBtn} onClick={() => remove()} disabled={isPending}>
+              {isPending ? 'Deleting…' : 'Yes, delete'}
+            </button>
+            <button className={styles.cancelConfirmBtn} onClick={() => setConfirming(false)}>
+              Cancel
+            </button>
+          </div>
+        ) : (
+          <button className={styles.deleteBtn} onClick={() => setConfirming(true)}>
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );

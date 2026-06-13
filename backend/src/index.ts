@@ -14,7 +14,7 @@ app.use((_req, res) => {
 });
 
 if (require.main === module) {
-  const PORT = process.env.PORT ?? 3002;
+  const PORT = 3002;
   app.listen(PORT, () => {
     console.log(`Asset tracker API running on http://localhost:${PORT}`);
   });
